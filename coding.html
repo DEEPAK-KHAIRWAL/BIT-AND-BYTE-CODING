@@ -1,0 +1,102 @@
+<! DOCTYPE HTML>
+<html>
+<head>
+<style>
+h1{text-align:center;
+color: blue}
+ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a, .dropbtn {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+	
+}
+
+li a:hover, .dropdown:hover .dropbtn {
+    background-color: red;
+}
+
+li.dropdown {
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+footer {
+    padding: 1em;
+    color: white;
+    background-color: black;
+    clear: left;
+    text-align: center;
+}
+</style>
+</head>
+<body style="background-color:powderblue;margin:0">
+<div style="background-color:pink;height:710px;width:300px;display:inline;float:left">
+</div>
+<div style="background-color:pink;height:710px;width:300px;float:right">
+</div>
+<ul>
+  <li><a href="">HOME</a></li>
+   <li class="dropdown">
+    <a href="" class="dropbtn">BYTE CODING</a>
+    <div class="dropdown-content">
+      <a href="huffman.html">HUFFMAN CODING</a>
+      <a href="variable.html">VARIABL BYTE CODING</a>
+    </div>
+  </li>
+  <li class="dropdown">
+    <a href="" class="dropbtn">BIT CODING</a>
+    <div class="dropdown-content">
+      <a href="golomb.html">GOLOMB CODING</a>
+      <a href="gamma.html">ELIAS GAMMA CODING</a>
+    </div>
+  </li>
+  <li style="float:right;background-color:blue"><a href="contact.html">CONTACT US</a></li>
+</ul>
+<h1>WELCOME TO THE CODING GHOST TREE</h1>
+<p style=" font-size: 20px ; font-family:serif">Data compression, source coding or bit-rate reduction involves encoding information using fewer bits than the
+original representation. Compression can be either lossy or lossless. Lossless compression reduces bits by identifying 
+and eliminating statistical redundancy. No information is lost in lossless compression. Lossy compression reduces 
+bits by removing unnecessary or less important information.
+There are several data compression technique we have come to know so far such as Huffman coding , bit coding , 
+byte coding. We want to design an interface through which user can use any compression technique to code or 
+decode a value.</p><br><hr><br>
+<img src="coding.jpg" height= 350px ; width= 890px style=" border: 5px double red ; border-radius:12px">
+</body>
+
+<footer>Copyright &copy; 2018 Ghost team, Times Internet Limited. All rights reserved | Vit University </footer>
+</html>

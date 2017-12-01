@@ -1,0 +1,111 @@
+<! DOCTYPE HTML>
+<html>
+<head>
+<style>
+h1{text-align:center;
+color: blue}
+span{
+color:white;
+font-family: verdana;
+}
+button {
+  display: inline-block;
+  padding: 10px 15px;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+button:hover {background-color: #3e8e41}
+
+button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);}
+a:hover{background-color: red}
+footer {
+    padding: 1em;
+    color: white;
+    background-color: black;
+    clear: left;
+    text-align: center;
+}
+</style>
+</head>
+<body style="background-color:powderblue;margin:0">
+<div style="background-color:pink;height:1400px;width:300px;float:left">
+</div>
+<div style="background-color:pink;height:1400px;width:300px;float:right">
+</div>
+<ul style="background-color:#333;height:47px;list-style-type:none;margin: 0;overflow:hidden;padding:0px">
+<li style="float:left"><li><a href="coding.html" style="color: white;text-align: center;padding: 14px 16px;text-decoration: none;float:left">HOME</a></li></li>
+</ul>
+<h1>THE GAMMA CODING</h1>
+<p>
+<pre style=" font-size: 20px ; font-family:serif">
+To code a number x >= 1:
+
+    Let N=log2 x be the highest power of 2 it contains, so 2N <= x < 2N+1.
+    Write out N zero bits, then
+    Append the binary form of x, an N+1-bit binary number.
+
+An equivalent way to express the same process:
+
+    Encode N in unary; that is, as N zeroes followed by a one.
+    Append the remaining N binary digits of x to this representation of N.
+
+</pre>
+</p><br>
+<img src="gamma.jpg" height= 400px ; width= 890px style=" border: 5px double red ; border-radius:12px"><br>
+<hr><br>
+<div style="margin-left:400px"><br><br>
+<p>ENTER YOUR NUMBER TO ENCODE:
+<input type="number" name= "vr" >  <br><br></p> 
+<button onclick='calculate(document.getElementsByName("vr")[0].value)'>SUBMIT</button><br><br>
+YOUR ANSWER IS: <span id="abc">  </span><br><br>
+<p>ENTER YOUR NUMBER TO DECODE:
+<input type="text" name= "vrd" >  <br><br></p> 
+<button onclick='dcalculate(document.getElementsByName("vrd")[0].value)'>SUBMIT</button><br><br>
+YOUR ANSWER IS: <span id="xyz">  </span>
+</div>
+<script>
+function calculate(n)
+{
+var a=[],b=[],k;
+var i=0,j;
+while(n>=2)
+	{
+		a[i]=n%2;
+		n=Math.floor(n/2);
+		i++;
+	}
+	a[i]=n;
+	var s='';
+	for(j=i;j>=0;j--)
+	s=s+a[j];
+	document.getElementById('abc').innerHTML='0'.repeat(i-1)+'1'+s.slice(1,s.length);
+	
+	}
+	function dcalculate(s)
+	{
+	var i=0,n;
+	while(s[i]!=1)
+	{
+	i++;
+	}
+	n=parseInt(s.slice(i,s.length),2);
+	document.getElementById('xyz').innerHTML=n;
+	}
+</script>
+<footer>Copyright &copy; 2018 Ghost team, Times Internet Limited. All rights reserved | Vit University </footer>
+</body>
+</html>

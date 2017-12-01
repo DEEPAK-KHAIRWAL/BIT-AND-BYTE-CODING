@@ -1,0 +1,187 @@
+<! DOCTYPE HTML>
+<html>
+<head>
+<style>
+h1{text-align:center;
+color: blue}
+span{
+color:white;
+font-family: verdana;
+}
+button {
+  display: inline-block;
+  padding: 10px 15px;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+button:hover {background-color: #3e8e41}
+
+button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);}
+a:hover{background-color: red}
+footer {
+    padding: 1em;
+    color: white;
+    background-color: black;
+    clear: left;
+    text-align: center;
+}
+</style>
+</head>
+<body style="background-color:powderblue;margin:0">
+<div style="background-color:pink;height:1400px;width:300px;float:left">
+</div>
+<div style="background-color:pink;height:1400px;width:300px;float:right">
+</div>
+<ul style="background-color:#333;height:47px;list-style-type:none;margin: 0;overflow:hidden;padding:0px">
+<li style="float:left"><li><a href="coding.html" style="color: white;text-align: center;padding: 14px 16px;text-decoration: none;float:left">HOME</a></li></li>
+</ul>
+<h1>THE HUFFMAN CODING</h1>
+<p>
+<pre style=" font-size: 20px ; font-family:serif">
+In computer science and information theory, a Huffman code is a particular type of optimal prefix code that is 
+commonly used for lossless 
+data compression. The process of finding and/or using such a code proceeds by means of Huffman coding, an 
+algorithm developed by David A.
+ Huffman while he was a Sc.D. student at MIT, and published in the 1952 paper "A Method for the Construction
+ of Minimum-Redundancy Codes"
+
+The output from Huffman's algorithm can be viewed as a variable-length code table for encoding a source 
+symbol(such as a character in a file). 
+The algorithm derives this table from the estimated probability or frequency of occurrence (weight) for each
+ possible value of the source symbol.
+ As in other entropy encoding methods, more common symbols are generally represented using fewer bits than 
+ less common symbols. Huffman's method 
+ can be efficiently implemented, finding a code in time linear to the number of input weights if these weights
+ are sorted. However, although optimal among methods encoding symbols separately, Huffman coding is 
+ not always optimal among all compression methods.
+</pre>
+</p><br>
+<img src="huffman.png" height= 400px ; width= 890px style=" border: 5px double red border-radius:12px"><br>
+<hr><br>
+<div style="margin-left:400px"><br><br>
+<p>ENTER YOUR STRING TO ENCODE:
+<input type="text" name= "hf" >  <br><br></p> 
+<button onclick='enc(document.getElementsByName("hf")[0].value)'>SUBMIT</button><br><br>
+YOUR ANSWER IS: <span id="abc"> </span>
+<p>ENTER YOUR STRING TO DECODE:
+<input type="text" name= "dhf" >  <br><br></p>
+<button onclick='dec(document.getElementsByName("dhf")[0].value)'>SUBMIT</button><br><br>
+YOUR ANSWER IS: <span id="xyz">  </span>
+</div>
+<script>
+
+function frequency(str){
+var freqs={};
+for (var i in str){
+
+if(freqs[str[i]]==undefined){
+
+freqs[str[i]]=1;
+}
+else {
+freqs[str[i]]=freqs[str[i]]+1;
+}
+}
+
+return freqs;
+}
+function sortfreq(freqs){
+var tuples=[];
+for( var let in freqs){
+tuples.push([freqs[let],let]);
+}
+return tuples.sort();
+}
+
+
+function buildtree(tuples){
+while(tuples.length>1){
+var leasttwo=[tuples[0][1],tuples[1][1]];
+//console.log(leasttwo);
+var rest=tuples.slice(2,tuples.length);
+//console.log(rest);
+var combfreq=tuples[0][0]+tuples[1][0];
+//console.log(combfreq);
+tuples=rest;
+end=[combfreq,leasttwo];
+//console.log(end);
+tuples.push(end)
+tuples.sort();
+}
+return tuples;
+}
+var code={};  
+var pat='';
+  //assiging codes to each letter  
+  function assignCode(node,pat)  
+  {  
+  document.getElementById("abc").innerHTML="jhh";
+      if(typeof(node)==typeof(""))  
+          code[node]=pat;  
+      else  
+      {  
+          assignCode( node[0], pat+'0');  
+          assignCode( node[1], pat+'1');  
+      }  
+	  
+  }
+function encode(string)  
+  {  
+      output='';  
+      for(s in string)  
+          output+=code[string[s]];  
+      return output;  
+  }  
+  encoded=encode(string);
+function decode(tree,encoded)  
+  {  
+      output='';  
+      p=tree;  
+      for(bit in encoded)  
+      {  
+          if(encoded[bit]=='0')  
+
+            p=p[0];  
+          else  
+              p=p[1];  
+
+          if(typeof(p)==typeof(''))  
+         {  
+          output+=p;  
+          p=tree;  
+
+          }  
+      }  
+      return output;  
+  }  
+  decoded=decode(tree,encoded);    
+function enc(s)
+{
+var t= buildtree(sortfreq(frequency(s)));
+//assignCode(t,pat);
+document.getElementById("abc").innerHTML=t;
+}
+function dec(s)
+{
+var t= decode(buildtree(sortfreq(frequency(s))));
+//assignCode(t,pat);
+document.getElementById("xyz").innerHTML=t;
+}
+</script>
+<footer>Copyright &copy; 2018 Ghost team, Times Internet Limited. All rights reserved | Vit University </footer>
+</body>
+</html>

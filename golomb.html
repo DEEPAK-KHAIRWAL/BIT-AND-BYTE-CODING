@@ -1,0 +1,153 @@
+<! DOCTYPE HTML>
+<html>
+<head>
+<style>
+h1{text-align:center;
+color: blue}
+span{
+color:white;
+font-family: verdana;
+}
+button {
+  display: inline-block;
+  padding: 10px 15px;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+button:hover {background-color: #3e8e41}
+
+button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);}
+a:hover{background-color: red}
+footer {
+    padding: 1em;
+    color: white;
+    background-color: black;
+    clear: left;
+    text-align: center;
+}
+</style>
+</head>
+<body style="background-color:powderblue;margin:0">
+<div style="background-color:pink;height:1500px;width:300px;float:left">
+</div>
+<div style="background-color:pink;height:1500px;width:300px;float:right">
+</div>
+<ul style="background-color:#333;height:47px;list-style-type:none;margin: 0;">
+<li style="float:left"><li><a href="coding.html" style="color: white;text-align: center;padding: 14px 16px;text-decoration: none;float:left">HOME</a></li>
+</ul><br><br>
+<h1>THE GOLOMB CODING</h1>
+<p>
+<pre style=" font-size: 20px ; font-family:serif">
+Golumb Coding is very popular bit coding scheme.Rice coding (invented by Robert F. Rice) denotes using a 
+subset of the family of Golomb codes to produce a simpler (but possibly suboptimal) prefix code. Rice 
+used this set of code an adaptive coding scheme; "Rice coding" can refer either to that adaptive scheme
+ or to using that subset of Golomb 
+codes. Whereas a Golomb code has a tunable parameter that can be any positive integer value, Rice codes 
+are those in which the tunable parameter is a power of two. This makes Rice codes convenient for use 
+on a computer since multiplication and division by 2 can be implemented more efficiently in binary 
+arithmetic.Rice was motivated to propose this simpler subset due to the fact that geometric
+ distributions are often varying with time, not precisely known, or both, so selecting the seemingly
+ optimal code might not be very  advantageous.
+A positive integer x is represented in two parts: 
+1. The first part is a unary representation of q+1, where q is the quotient and 2. The second part is a 
+special binary representation of the remainder r =x - qb. Note that there are b possible remainders.
+For example,if b=3,
+   the possible remainders will be 0, 1, and 2.
+2. The binary representation of a remainder requires 2 bits. Let i = 2 We 
+   code the first d remainders using i bits, d = 2i+1-b
+3. d remainders are all less than d.
+4. The rest of the remainders are coded with 2 bits and are all greater than or equal to d.
+5. They are coded using a special binary code (also called a fixed prefix code) with 2 (or i+1) bits.
+</pre>
+</p><br>
+<img src="golomb.jpg" height= 400px ; width= 890px style=" border: 5px double red border-radius:12px"><br>
+<hr><br>
+<div style="margin-left:440px">
+ENTER YOUR NUMBER TO ENCODE:
+<input type="number" name= "egm" >  <br><br>
+<button  onclick='document.getElementById("xyz").innerHTML=ExpGolomb_encode(document.getElementsByName("egm")[0].value,true)'>SUBMIT</button><br><br>
+YOUR ANSWER IS: <span id="xyz">  </span><br><br>
+ENTER YOUR NUMBER TO DECODE:
+<input type="text" name= "dgm" > <br><br>
+<button  onclick='document.getElementById("abc").innerHTML=ExpGolomb_decode(document.getElementsByName("dgm")[0].value,true)'>SUBMIT</button><br><br>
+YOUR ANSWER IS: <span id="abc">  </span><br><br>
+</div>
+
+<script src="golomb/lib/WebModule.js"></script>
+<script src="golomb/lib/ExpGolomb.js"></script>
+<script>
+
+
+
+
+function ExpGolomb_encode(value,    // @arg UINT32|INT32
+                          signed) { // @arg Boolean = false
+                                    // @ret BinaryString
+    if (value === 0) { return "1"; }
+
+    // | Bits          | unsigned | signed |
+    // |---------------|----------|--------|
+    // |             1 |        0 |      0 |
+    // |           010 |        1 |      1 |
+    // |           011 |        2 |     -1 |
+    // |         00100 |        3 |      2 |
+    // |         00101 |        4 |     -2 |
+    // |         00110 |        5 |      3 |
+    // |         00111 |        6 |     -3 |
+    // |       0001000 |        7 |      4 |
+    // |       0001001 |        8 |     -4 |
+    // |       0001010 |        9 |      5 |
+    // |       0001011 |       10 |     -5 |
+    // |       0001100 |       11 |      6 |
+
+    if (signed) {
+        if (value < 0) {
+            value = -(value * 2); // negative
+        } else {
+            value = value * 2 - 1; // positive
+        }
+    }
+    var bits = (value + 1).toString(2);
+
+    return "0".repeat(bits.length - 1) + bits;
+}
+
+function ExpGolomb_decode(value,    // @arg BinaryString
+                          signed) { // @arg Boolean = false
+                                    // @ret UINT32|INT32
+    if (value === "1") { return 0; }
+
+    var result = parseInt(value, 2) - 1;
+
+    if (signed) {
+        var hasSignedBit = value[value.length - 1] === "1";
+
+        if (hasSignedBit) {
+            result = -(result / 2);
+        } else {
+            result = (result + 1) / 2;
+        }
+        return result;
+    }
+    return result;
+}
+
+
+</script>
+<footer>Copyright &copy; 2018 Ghost team, Times Internet Limited. All rights reserved | Vit University </footer>
+</body>
+</html>
